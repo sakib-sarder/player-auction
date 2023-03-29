@@ -6,7 +6,7 @@ const PlayerCard = ({ player, addToEleven }) => {
     <div>
       <div className="bg-base-100 shadow-xl py-5 rounded-xl">
         <figure className="px-10 pt-10 mb-4">
-          <img src={image} alt="Shoes" className="rounded-xl" />
+          <img src={image} alt="Shoes" className="rounded-xl w-full" />
         </figure>
         <div>
           <h2 className="card-title ps-2">{name}</h2>

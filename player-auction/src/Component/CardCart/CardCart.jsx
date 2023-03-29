@@ -12,23 +12,33 @@ const CardCart = () => {
       .then((data) => setPlayers(data));
   }, []);
 
-  /* useEffect(() => {
-    const storedPlayer = getShoppingCart();
-    const savedCart = [];
-    for (const id in storedPlayer) {
-      const addedPlayer = players.find(player => player.id === id);
-      if(addedPlayer){
-        savedCart.push(addedPlayer);
-      }
-      setCartPlayer(savedCart);
-    }
-  },[players]) */
 
   const addToEleven = (player) => {
-    const newCart = [...cartPlayer, player];
-    setCartPlayer(newCart)
+    // const newCart = [...cartPlayer, player];
+    const exists = cartPlayer.find((pl) => pl.id === player.id);
+    if (exists) {
+      alert("The Player Already Added");
+    } else {
+      const newCart = [...cartPlayer, player];
+      setCartPlayer(newCart);
+    }
+
+    let localCart = [];
+    const previousAddedPlayer = JSON.parse(localStorage.getItem("player-cart"));
+    if (previousAddedPlayer) {
+      const isThisAlreadyAdded = previousAddedPlayer.find(pap => pap.id === player.id);
+      if (isThisAlreadyAdded) {
+        
+      } else {
+        localCart.push(...previousAddedPlayer, player);
+        localStorage.setItem('player-cart', JSON.stringify(localCart));
+      }
+    } else {
+      localCart.push(player);
+      localStorage.setItem('player-cart', JSON.stringify(localCart))
+    }
   };
-  console.log(cartPlayer);
+  // console.log(cartPlayer);
   return (
     <>
       <div className="flex flex-col md:flex-row">
